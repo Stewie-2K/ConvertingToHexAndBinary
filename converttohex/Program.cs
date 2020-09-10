@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace converttohex
+namespace converfromdenary
 {
     class Program
     {
@@ -8,13 +8,10 @@ namespace converttohex
         {
             int num;
             string hex = "";
-            int x = 0;
             int pow = 0;
-            string ins;
-            int intins;
-            string[] letters = { "A", "B", "C", "D", "E" };
+            
             string convertto;
-            int z=0;
+            int z = 0;
 
             // selecting what to convert from and to
 
@@ -24,30 +21,48 @@ namespace converttohex
             if (convertto.ToUpper() == "BINARY")
             {
                 z = 2;
-            }else if (convertto.ToUpper() == "HEXIDECIMAL")
+            }
+            else if (convertto.ToUpper() == "HEXIDECIMAL")
             {
                 z = 16;
             }
 
 
-
-
-
-                Console.WriteLine("Enter number to be converted to hexidecimal.");
+            Console.WriteLine("Enter number to be converted to hexidecimal.");
             num = Convert.ToInt32(Console.ReadLine());
 
             //what power
 
-            if (num > (z-1))
+            pow = FindPow(num, z);
+
+
+            // converting
+
+            hex = ConvertFromDenary(num, z, pow);
+
+            Console.WriteLine(hex);
+            Console.ReadLine();
+        }
+        static int FindPow(int num, int z)
+        {
+            int pow = 0;
+            if (num > (z - 1))
             {
                 while (Convert.ToInt32(Math.Floor(num / Math.Pow(z, pow + 1))) >= 1)
                 {
                     pow += 1;
                 }
             }
+            return pow;
+        }
 
-
-            // converting
+        static string ConvertFromDenary(int num, int z, int pow)
+        {
+            string hex = "";
+            string ins;
+            int intins;
+            string[] letters = { "A", "B", "C", "D", "E" };
+            
 
             for (int y = pow; y >= 0; y--)
             {
@@ -61,9 +76,7 @@ namespace converttohex
                 hex = hex + ins;
                 num = Convert.ToInt32(num % (Math.Pow(z, y)));
             }
-
-            Console.WriteLine(hex);
-            Console.ReadLine();
+            return hex;
         }
     }
 }
