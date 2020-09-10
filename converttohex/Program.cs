@@ -9,39 +9,51 @@ namespace converfromdenary
             int num;
             string hex = "";
             int pow = 0;
+            string convertfrom;
             
             string convertto;
             int z = 0;
 
             // selecting what to convert from and to
+            Console.WriteLine("What do you want to convert from?");
+            convertfrom = Console.ReadLine().ToUpper();
 
-
-            Console.WriteLine("What do you want to convert to?");
-            convertto = Console.ReadLine();
-            if (convertto.ToUpper() == "BINARY")
+            if (convertfrom == "DENARY")
             {
-                z = 2;
+                Console.WriteLine("What do you want to convert to?");
+
+                convertto = Console.ReadLine().ToUpper();
+                if (convertto == "BINARY")
+                {
+                    z = 2;
+                }
+                else if (convertto == "HEXIDECIMAL" || convertto.ToUpper() == "HEX")
+                {
+                    z = 16;
+                }
+
+
+                Console.WriteLine("Enter number to be converted to hexidecimal.");
+                num = Convert.ToInt32(Console.ReadLine());
+
+                //what power
+
+                pow = FindPow(num, z);
+
+
+                // converting
+
+                hex = ConvertFromDenary(num, z, pow);
+
+                Console.WriteLine(hex);
+                Console.ReadLine();
             }
-            else if (convertto.ToUpper() == "HEXIDECIMAL")
+
+            if (convertfrom == "BINARY")
             {
-                z = 16;
+                Console.WriteLine("What would you like to convert to?");
+                convertto = Console.ReadLine();
             }
-
-
-            Console.WriteLine("Enter number to be converted to hexidecimal.");
-            num = Convert.ToInt32(Console.ReadLine());
-
-            //what power
-
-            pow = FindPow(num, z);
-
-
-            // converting
-
-            hex = ConvertFromDenary(num, z, pow);
-
-            Console.WriteLine(hex);
-            Console.ReadLine();
         }
         static int FindPow(int num, int z)
         {
